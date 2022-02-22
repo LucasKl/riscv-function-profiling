@@ -5,7 +5,7 @@ The profiler program consists of a single Python script that accesses and analyz
 
 
 ## Installation
-The only reuirement for this script is Python < 3.10 and the *wal-lang* Python package.
+The only requirement for this script is Python < 3.10 and the *wal-lang* Python package.
 Install WAL by typing `pip install wal-lang`.
 
 _On some systems, pip does not add WALs installation path to the PATH variable. If the "wal" command is not available after installation please add the installation path, e.g. ~/.local/bin on Ubuntu, to your PATH variable._
@@ -15,7 +15,7 @@ To profile a waveform you need to have a RISC-V elf binary and a vcd waveform of
 Profiling is started py running the Python script with the elf file as the first and the vcd file as the second argument.
 
 This repository contains examples for the SERV and VexRiscv cores.
-Tue to space concerns I have converted the larger vcd files to the fst format. However, currently WAL only supports vcd files therefore you have to 
+Tue to space concerns I have converted the larger vcd files to the fst format. However, currently, WAL only supports vcd files therefore you have to 
 convert the fst files back to vcd using the "fst2vcd" command included with gtkwave. 
 
 If you dont have gtkwave installed you can still try the vexriscv/gcd example!
@@ -29,13 +29,13 @@ fst2vcd bubblesort.fst > bubblesort.vcd;
 ```
 
 ### VexRiscv
-A simple example with a greates common divisor implementation.
+A simple example with a greatest common divisor implementation.
 ```
 cd vexriscv;
 ../profile.py gcd.elf gcd.vcd
 ```
 
-The Dhrystone benchmark running on the VexRiscv.
+The Dhrystone benchmark running on the VexRiscv core.
 ```
 cd vexriscv;
 fst2vcd dhrystone.fst > dhrystone.vcd;
@@ -44,11 +44,11 @@ fst2vcd dhrystone.fst > dhrystone.vcd;
 
 ## How does it work?
 This program extracts information about the functions from the elf file using the "nm" command. This command prints a list of all symbols and their sizes*.
-Using this information the start and end addresses of functions is calculated. Then, the WAL code, which is embedded into the main script similar to SQL query, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated to this address is incremented.
+Using this information the start and end addresses of functions are calculated. Then, the WAL code, which is embedded into the main script similar to SQL query, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated with this address is incremented.
 
 ### Adapting to Other Cores
-To adapted a new core to this script is easy. All you have to do is to know the name of the clk signal, detect when an instruction is commited and which address this instruction had.
-This information can than be entered in a new `config.wal` file just like the ones in [SERV](https://github.com/LucasKl/riscv-function-profiling/blob/main/serv/config.wal) and [VexRiscv](https://github.com/LucasKl/riscv-function-profiling/blob/main/vexriscv/config.wal) config files.
+To adapt a new core to this script is easy. All you have to do is to know the name of the clk signal, detect when an instruction is committed and which address this instruction had.
+This information can then be entered in a new `config.wal` file just like the ones in [SERV](https://github.com/LucasKl/riscv-function-profiling/blob/main/serv/config.wal) and [VexRiscv](https://github.com/LucasKl/riscv-function-profiling/blob/main/vexriscv/config.wal) config files.
 
 The config file specifies three alternative names at which the WAL program finds the information it needs.
 
@@ -62,4 +62,4 @@ So you have to change `(alias clk ....)` to `(alias clk you.clk.signal)`
 
 ---
 
-This program was inspired by [this](https://twitter.com/OlofKindgren/status/1495845664999325704) conversation on twitter about hardware tools
+This program was inspired by [this](https://twitter.com/OlofKindgren/status/1495845664999325704) conversation on Twitter about hardware tools
