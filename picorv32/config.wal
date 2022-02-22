@@ -1,0 +1,4 @@
+; Picorv32 
+(alias clk testbench.clk)
+(alias fire testbench.uut.launch_next_insn)
+(alias pc testbench.uut.next_pc)

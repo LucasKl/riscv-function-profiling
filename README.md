@@ -42,6 +42,15 @@ fst2vcd dhrystone.fst > dhrystone.vcd;
 ../profile.py dhrystone.elf dhrystone.vcd
 ```
 
+### Picorv32
+The Dhrystone benchmark running on the Picorv32 core.
+```
+cd picorv32;
+fst2vcd dhrystone.fst > dhrystone.vcd;
+../profile.py dhrystone.elf dhrystone.vcd
+```
+
+
 ## How does it work?
 This program extracts information about the functions from the elf file using the "nm" command. This command prints a list of all symbols and their sizes*.
 Using this information the start and end addresses of functions are calculated. Then, the WAL code, which is embedded into the main script similar to SQL query, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated with this address is incremented.
