@@ -1,0 +1,20 @@
+(import run)
+
+(load "gcd.vcd" t)
+
+(alias fire TOP.VexRiscv.lastStageIsFiring)
+(alias pc TOP.VexRiscv.lastStagePc)
+
+(set [funcs (call run.ranges)]
+     [dist (array)])
+
+(defun count-function [addr]
+  (for [f funcs]
+    (when (&& (>= addr f[1]) (<= addr f[2]))
+    	  (seta dist f[0] (+ (geta/default dist 0 f[0]) 1)))))
+
+
+
+(whenever (&& TOP.clk fire) (count-function pc))
+
+(mapa (fn [name count] (printf "%20s: %d\n" name count)) dist)

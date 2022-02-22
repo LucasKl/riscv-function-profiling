@@ -1,0 +1,4 @@
+; SERV
+(alias clk TOP.servant_sim.dut.cpu.clk)
+(alias fire TOP.servant_sim.dut.wb_ibus_ack)
+(alias pc TOP.servant_sim.dut.wb_ibus_adr)
