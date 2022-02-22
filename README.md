@@ -21,7 +21,7 @@ convert the fst files back to vcd using the "fst2vcd" command included with gtkw
 If you dont have gtkwave installed you can still try the vexriscv/gcd example!
 
 ### SERV
-
+A bubblesort implementation sorting an array of 20 integers. Supplemented with additional printing and memcpy functions.
 ```
 cd serv;
 fst2vcd bubblesort.fst > bubblesort.vcd;
@@ -42,7 +42,20 @@ fst2vcd dhrystone.fst > dhrystone.vcd;
 ../profile.py dhrystone.elf dhrystone.vcd
 ```
 
-
 ## How does it work?
+This program extracts information about the functions from the elf file using the "nm" command. This command prints a list of all symbols and their sizes*.
+Using this information the start and end addresses of functions is calculated. Then, the WAL code, which is embedded into the main script similar to SQL query, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated to this address is incremented.
 
+### Adapting to Other Cores
+To adapted a new core to this script is easy. All you have to do is to know the name of the clk signal, detect when an instruction is commited and which address this instruction had.
+This information can than be entered in a new `config.wal` file just like the ones in [SERV] (https://github.com/LucasKl/riscv-function-profiling/blob/main/serv/config.wal) and [VexRiscv] (https://github.com/LucasKl/riscv-function-profiling/blob/main/vexriscv/config.wal) config files.
 
+The config file specifies three alternative names at which the WAL program finds the information it needs.
+
+```
+(alias clk TOP.servant_sim.dut.cpu.clk)
+(alias fire TOP.servant_sim.dut.wb_ibus_ack)
+(alias pc TOP.servant_sim.dut.wb_ibus_adr)
+```
+
+So you have to change `(alias clk ....)` to `(alias clk you.clk.signal)`
