@@ -25,21 +25,21 @@ A bubblesort implementation sorting an array of 20 integers. Supplemented with a
 ```
 cd serv;
 fst2vcd bubblesort.fst > bubblesort.vcd;
-../profile.py bubblesort.elf bubblesort.vcd
+python ../profile.py bubblesort.elf bubblesort.vcd
 ```
 
 ### VexRiscv
 A simple example with a greatest common divisor implementation.
 ```
 cd vexriscv;
-../profile.py gcd.elf gcd.vcd
+python ../profile.py gcd.elf gcd.vcd
 ```
 
 The Dhrystone benchmark running on the VexRiscv core.
 ```
 cd vexriscv;
 fst2vcd dhrystone.fst > dhrystone.vcd;
-../profile.py dhrystone.elf dhrystone.vcd
+python ../profile.py dhrystone.elf dhrystone.vcd
 ```
 
 ## How does it work?
