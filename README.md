@@ -59,3 +59,7 @@ The config file specifies three alternative names at which the WAL program finds
 ```
 
 So you have to change `(alias clk ....)` to `(alias clk you.clk.signal)`
+
+---
+
+This program was inspired by [this](https://twitter.com/OlofKindgren/status/1495845664999325704) conversation on twitter about hardware tools
