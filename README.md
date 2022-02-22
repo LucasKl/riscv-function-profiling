@@ -48,7 +48,7 @@ Using this information the start and end addresses of functions is calculated. T
 
 ### Adapting to Other Cores
 To adapted a new core to this script is easy. All you have to do is to know the name of the clk signal, detect when an instruction is commited and which address this instruction had.
-This information can than be entered in a new `config.wal` file just like the ones in [SERV] (https://github.com/LucasKl/riscv-function-profiling/blob/main/serv/config.wal) and [VexRiscv] (https://github.com/LucasKl/riscv-function-profiling/blob/main/vexriscv/config.wal) config files.
+This information can than be entered in a new `config.wal` file just like the ones in [SERV](https://github.com/LucasKl/riscv-function-profiling/blob/main/serv/config.wal) and [VexRiscv](https://github.com/LucasKl/riscv-function-profiling/blob/main/vexriscv/config.wal) config files.
 
 The config file specifies three alternative names at which the WAL program finds the information it needs.
 
