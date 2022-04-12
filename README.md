@@ -53,7 +53,7 @@ fst2vcd dhrystone.fst > dhrystone.vcd;
 
 ## How does it work?
 This program extracts information about the functions from the elf file using the "nm" command. This command prints a list of all symbols and their sizes*.
-Using this information the start and end addresses of functions are calculated. Then, the WAL code, which is embedded into the main script similar to SQL query, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated with this address is incremented.
+Using this information the start and end addresses of functions are calculated. Then, the WAL code, which is embedded into the main script similar to SQL queries, searches the waveform for all executed instructions and their location in the binary. The location is then compared to the function address ranges and a counter for the function that is associated with this address is incremented.
 
 ### Adapting to Other Cores
 To adapt a new core to this script is easy. All you have to do is to know the name of the clk signal, detect when an instruction is committed and which address this instruction had.
