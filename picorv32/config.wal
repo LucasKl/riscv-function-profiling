@@ -1,4 +1,3 @@
 ; Picorv32 
-(alias clk testbench.clk)
-(alias fire testbench.uut.launch_next_insn)
-(alias pc testbench.uut.next_pc)
+(defmacro fire [] `(&& (rising testbench.clk) testbench.resetn testbench.uut.launch_next_insn))
+(defmacro pc [] 'testbench.uut.next_pc)
