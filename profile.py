@@ -49,20 +49,27 @@ if __name__ == '__main__':
 
     wal = Wal()
     wal.load(VCD)
-    wal.eval('(require config)') # require config script to get concrete signal names
-    wal.eval('''(defun count-function [addr]
-                   (for [f funcs]
-                     (when (&& (>= addr f[1]) (<= addr f[2]))
-    	                 (seta dist f[0] (+ (geta/default dist 0 f[0]) 1)))))''')
+    wal.eval_str('(eval-file config)') # require config script to get concrete signal names
+
+    def count_function(seval, addr):
+        addr = seval.eval(addr[0])
+        for function in functions:
+            if addr >= function[1] and addr <= function[2]:
+                function[3] += 1
+                return
+
+    wal.register_operator("count-function", count_function)
 
     # calculate the time spent in each function, does not take subcalls into account
-    dist = {}
-    instructions_executed = wal.eval('(whenever (fire) (count-function (pc)) (inc ninstr))', funcs=functions, dist=dist)
+    wal.eval_str('(define ninstr 0)')
+    instructions_executed = wal.eval_str('(whenever (fire) (count-function pc) (inc ninstr))', funcs=functions)
 
     # print results
     in_known_function = 0
     print('Time spent in functions:')
-    for name, count in dist.items():
+    for function in functions:
+        name = function[0]
+        count = function[3]
         in_known_function += count
         print(f'{name:>20}: {count/instructions_executed*100:.2f}% ({count})')
 

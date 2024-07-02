@@ -4,4 +4,4 @@
 (alias fire-signal TOP.servant_sim.dut.wb_ibus_ack)
 
 (defmacro fire [] `(&& clk (! rst) fire-signal))
-(defmacro pc [] 'TOP.servant_sim.dut.wb_ibus_adr)
+(alias pc TOP.servant_sim.dut.wb_ibus_adr)
